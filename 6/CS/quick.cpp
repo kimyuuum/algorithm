@@ -3,26 +3,26 @@ using namespace std;
 int arr[7] = {15, 4, 7, 2, 5, 8, 9};
 
 int partition(int left, int right) {
-  int pivot = arr[left];
-  int low = left + 1;
-  int high = right;
+  int pivot = arr[right];
+  int low = left;
+  int high = right - 1;
 
   while (low <= high) {
-    while (arr[low] <= pivot && low <= right) {
+    while (low < right && arr[low] < pivot) {
       low++;
     }
-    while (arr[high] >= pivot && high > left) {
+    while (high >= left && arr[high] > pivot) {
       high--;
     }
 
     if (low > high) {
-      swap(arr[left], arr[high]);
+      swap(arr[right], arr[low]);
     } else {
       swap(arr[low], arr[high]);
     }
   }
 
-  return high;
+  return low;
 }
 
 void quicksort(int left, int right) {
